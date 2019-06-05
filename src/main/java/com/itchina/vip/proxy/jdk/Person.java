@@ -1,4 +1,4 @@
-package com.itchina.vip.jdk.proxy;
+package com.itchina.vip.proxy.jdk;
 
 public interface Person {
 	
