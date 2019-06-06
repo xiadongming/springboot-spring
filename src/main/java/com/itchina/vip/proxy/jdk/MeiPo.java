@@ -22,7 +22,7 @@ public class MeiPo implements InvocationHandler {
 		 * 可以这么理解：owner对象中带有参数args的method方法。返回值是Object，也既是该方法的返回值。
 		 **/
 		System.out.println("=============");
-		System.out.println(proxy.getClass());// proxy是代理对象
+		System.out.println(proxy.getClass());// proxy是代理对象proxy0
 		System.out.println(target);
 		// System.out.println(proxy.toString());//栈溢出
 		System.out.println(method.getName());

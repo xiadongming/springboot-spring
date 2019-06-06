@@ -8,17 +8,18 @@ public class TestFindLove {
 
 	public static void main(String[] args) {
 
+		//å°†å­ç±»å¼•ç”¨æŒ‡å‘çˆ¶ç±»(æ¥å£)
 		Person obj = (Person) new MeiPo().getInstance(new ZhangSan());
 		obj.findLove();
-		System.out.println(obj.getClass());// objÊÇ´úÀí¶ÔÏó£¬²»ÊÇZhangSanÕâ¸ö¶ÔÏó
+		System.out.println(obj.getClass());// objï¿½Ç´ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬²ï¿½ï¿½ï¿½ZhangSanï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		/***
-		 * objÊÇ´úÀíÀà£¬ÊÇÖØĞÂÉú³ÉµÄÒ»¸öÀà£¬ºÍZhangSan²»ÊÇÒ»¸öÀà
+		 * objï¿½Ç´ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½Ò»ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ZhangSanï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
 		 */
 		/**
-		 * Ò»¸öÀàÒÑ$¿ªÍ·£¬Ò»°ã¶¼ÊÇ´úÀíÀà
+		 * Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½$ï¿½ï¿½Í·ï¿½ï¿½Ò»ï¿½ã¶¼ï¿½Ç´ï¿½ï¿½ï¿½ï¿½ï¿½
 		 * **/
-		//»ñÈ¡×Ö½ÚÂëÄÚÈİ
+		//ï¿½ï¿½È¡ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		byte[] data = ProxyGenerator.generateProxyClass("$Proxy0", new Class[] { obj.getClass() });
 		FileOutputStream fos;
 		try {
