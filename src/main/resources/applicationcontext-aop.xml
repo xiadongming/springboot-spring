@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+	<!-- 使 AspectJ 的注解起作用 --><!-- 使用xml配置aop时可以省略 -->
+	<!-- <aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->
+	<bean id="logAspect" class="com.itchina.vip.aop.aspect.LogAspect" />
+	<bean id="memberManger" class="com.itchina.vip.aop.aspect.MemberManger" />
+	<bean id="authService" class="com.itchina.vip.aop.aspect.AuthService" />
+	<aop:config>
+		<!-- 配置切点，是具体类的具体方法，不是切面的方法 -->
+		<aop:pointcut
+			expression="execution(* com.itchina.vip.aop.aspect.AuthService.loginAuthService(..))"
+			id="loginAuthService" />
+		<aop:pointcut
+			expression="execution(* com.itchina.vip.aop.aspect.AuthService.loginoutAuthService(..))"
+			id="loginoutAuthService" />
+		<!-- execution(* com.itchina.vip.aop.aspect.AuthService.loginAuthService(..)) 代表这个方法，aop会执行 -->
+		<!-- execution(* com.itchina.vip.aop.aspect.MemberManger.*(..))代表这个类下，任意方法执行，aop都会执行 -->
+		<!-- execution(* com.itchina.vip.aop.aspect..*(..)) 代表这个包下的所有类，只要任意一个类执行，都会触发id对应aop通知 -->
+		<aop:pointcut expression="execution(* com.itchina.vip.aop.aspect.MemberManger.*(..))" id="addMemberManger" />
+		<!-- 定义切面，和logAspect对应 ，-->
+		<aop:aspect ref="logAspect">
+			<aop:before method="beforeLogAspect" pointcut-ref="loginAuthService" />
+			<aop:after method="afterLogAspect" pointcut-ref="loginAuthService" />
+			 <aop:after-throwing method="afterthrowLogAspect" pointcut-ref="loginAuthService" />
+			 <aop:after-returning method="afterReturnLogAspect" returning="rvt" pointcut-ref="loginAuthService"/>
+		</aop:aspect>
+		<!-- 定义第二个切面，和logAspect对应 -->
+		<aop:aspect ref="logAspect">
+			<aop:after-returning method="afterReturnLogAspect" returning="Boolean" pointcut-ref="addMemberManger" />
+		</aop:aspect>
+	</aop:config>
+	
+	<!-- ========================以下是采用注解版的配置  ===============================-->
+	<!-- 使 AspectJ 的注解起作用 --><!-- 使用xml配置aop时可以省略 -->
+	 <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<bean id="annotationAspect" class="com.itchina.vip.aop.annotation.aspect.AnnotationAspect" />
+	<bean id="annotationAuthService" class="com.itchina.vip.aop.annotation.aspect.AnnotationAuthService" />
+	<bean id="annotationMemberManger" class="com.itchina.vip.aop.annotation.aspect.AnnotationMemberManger" />
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</beans>
